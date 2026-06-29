@@ -23,6 +23,7 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 20px; transition: background-color 0.3s, color 0.3s; }
         .container { max-width: 900px; margin: auto; background: var(--container-bg); padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); transition: background-color 0.3s; }
         
+        /* GIAO DIỆN XÁC THỰC */
         #login-screen { max-width: 400px; margin: 80px auto; text-align: center; }
         .login-icon { font-size: 60px; margin-bottom: 10px; }
         .auth-tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); }
@@ -76,21 +77,22 @@
         th, td { padding: 12px; border-bottom: 1px solid var(--border-color); }
         th { background-color: var(--card-bg); font-weight: 600; color: var(--text-muted); }
         .action-btn { padding: 6px 10px; font-size: 12px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; margin-right: 5px; }
+        .edit-btn { background: #ecc94b; color: #1a202c; }
         .delete-btn { background: var(--danger-color); color: white; }
         .chart-container { width: 100%; max-width: 400px; margin: 0 auto 30px auto; }
 
         /* Giao diện Chat AI Bot */
-        #ai-chat-btn { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; border: none; border-radius: 50px; padding: 15px 25px; font-size: 16px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; font-weight: bold; display: none; transition: 0.3s;}
+        #ai-chat-btn { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 50px; padding: 15px 25px; font-size: 16px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; font-weight: bold; display: none; transition: 0.3s;}
         #ai-chat-btn:hover { transform: scale(1.05); }
         
-        #ai-chat-window { position: fixed; bottom: 90px; right: 30px; width: 350px; background: var(--container-bg); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; display: none; flex-direction: column; overflow: hidden; }
-        .ai-header { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-        .ai-body { height: 350px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; background: var(--card-bg); font-size: 14px;}
+        #ai-chat-window { position: fixed; bottom: 90px; right: 30px; width: 340px; background: var(--container-bg); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; display: none; flex-direction: column; overflow: hidden; }
+        .ai-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+        .ai-body { height: 300px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; background: var(--card-bg); font-size: 14px;}
         .msg-ai { background: var(--nav-bg); padding: 10px 14px; border-radius: 12px 12px 12px 2px; align-self: flex-start; max-width: 85%; color: var(--text-color); border: 1px solid var(--border-color); line-height: 1.4;}
-        .msg-user { background: var(--primary-color); color: white; padding: 10px 14px; border-radius: 12px 12px 2px 12px; align-self: flex-end; max-width: 85%; line-height: 1.4;}
+        .msg-user { background: #3182ce; color: white; padding: 10px 14px; border-radius: 12px 12px 2px 12px; align-self: flex-end; max-width: 85%; line-height: 1.4;}
         .ai-footer { display: flex; padding: 10px; border-top: 1px solid var(--border-color); background: var(--container-bg); }
         .ai-footer input { flex: 1; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; background: var(--input-bg); color: var(--text-color);}
-        .ai-footer button { background: var(--primary-color); color: white; border: none; padding: 10px 15px; margin-left: 8px; border-radius: 8px; cursor: pointer; font-weight: bold;}
+        .ai-footer button { background: #3182ce; color: white; border: none; padding: 10px 15px; margin-left: 8px; border-radius: 8px; cursor: pointer; font-weight: bold;}
     </style>
 </head>
 <body>
@@ -223,33 +225,27 @@
                 <label>Ngưỡng cảnh báo ví sắp cạn (VNĐ):</label>
                 <input type="number" id="warning-threshold" min="0" required>
             </div>
-            <button type="submit" class="btn">Lưu Cấu Hình Ví</button>
+            <button type="submit" class="btn">Lưu Cấu Hình</button>
         </form>
     </section>
 </div>
 
-<button id="ai-chat-btn" onclick="toggleAIChat()">✨ Chat với Gemini AI</button>
+<button id="ai-chat-btn" onclick="toggleAIChat()">✨ Trợ lý AI</button>
 <div id="ai-chat-window">
     <div class="ai-header">
-        <span>✨ Gemini AI Assistant</span>
+        <span>✨ Trợ lý AI Thông Minh</span>
         <span style="cursor:pointer;" onclick="toggleAIChat()">✖</span>
     </div>
     <div class="ai-body" id="ai-chat-body">
-        <div class="msg-ai" id="ai-welcome-msg">Tôi là Trợ lý tài chính được hỗ trợ bởi Google Gemini. Hãy thử chat: <i>"Tôi vừa uống trà sữa hết 60k, và nhận tiền lì xì 100k"</i>. Tôi sẽ tự động bóc tách và phân loại giúp bạn!</div>
+        <div class="msg-ai">Xin chào! Tôi có thể tự động ghi nhận chi tiêu hoặc nạp tiền giúp bạn. Hãy thử nói: <i>"Tôi vừa ăn phở hết 45k"</i> hoặc <i>"Nhận lương 5 triệu"</i>.</div>
     </div>
     <form class="ai-footer" onsubmit="handleAIChat(event)">
-        <input type="text" id="ai-input" placeholder="Nhập chi tiêu / thu nhập..." autocomplete="off">
+        <input type="text" id="ai-input" placeholder="Nhắn gì đó..." autocomplete="off">
         <button type="submit">Gửi</button>
     </form>
 </div>
 
 <script>
-    // =======================================================
-    // 🔴 DÁN MÃ API KEY CỦA BẠN VÀO BÊN DƯỚI ĐÂY:
-    // =======================================================
-    const GEMINI_API_KEY = "AQ.Ab8RN6IPfgzBsCA5Cp1ekKRkdBOYEoqohuk8QMNdTMdKtjsmZw"; 
-    // =======================================================
-
     // --- HỆ THỐNG XÁC THỰC ---
     let authMode = 'login';
     let currentUser = null;
@@ -286,14 +282,18 @@
         let usersDB = JSON.parse(localStorage.getItem('pro_users_db')) || [];
 
         if (authMode === 'register') {
-            if (usersDB.some(u => u.username === userVal)) { showAuthMsg('Tên đăng nhập đã tồn tại!', true); return; }
+            if (usersDB.some(u => u.username === userVal)) {
+                showAuthMsg('Tên đăng nhập đã tồn tại!', true); return;
+            }
             usersDB.push({ username: userVal, password: passVal });
             localStorage.setItem('pro_users_db', JSON.stringify(usersDB));
+            // Đánh dấu người dùng mới tạo để chuyển hướng về cấu hình ví
             localStorage.setItem('pro_is_new_' + userVal, 'true'); 
             showAuthMsg('Đăng ký thành công! Hãy đăng nhập.', false);
             document.getElementById('auth-form').reset();
             switchAuthMode('login'); 
-        } else if (authMode === 'login') {
+        } 
+        else if (authMode === 'login') {
             const user = usersDB.find(u => u.username === userVal && u.password === passVal);
             if (user) {
                 localStorage.setItem('pro_active_user', user.username);
@@ -310,7 +310,7 @@
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('main-app').style.display = 'block';
             document.getElementById('display-username').innerText = currentUser;
-            document.getElementById('ai-chat-btn').style.display = 'block';
+            document.getElementById('ai-chat-btn').style.display = 'block'; // Hiện nút AI
             initUserData();
         } else {
             document.getElementById('login-screen').style.display = 'block';
@@ -321,7 +321,7 @@
     }
 
     function handleLogout() {
-        if(confirm("Đăng xuất khỏi hệ thống?")) {
+        if(confirm("Bạn có chắc chắn muốn đăng xuất?")) {
             localStorage.removeItem('pro_active_user');
             checkLoginStatus();
         }
@@ -330,25 +330,27 @@
     // --- KHỐI DỮ LIỆU & GIAO DIỆN CHÍNH ---
     let expenses = [];
     let config = {};
+    let isEditing = false;
     let expenseChart = null;
 
     function initUserData() {
         expenses = JSON.parse(localStorage.getItem('pro_exp_' + currentUser)) || [];
-        config = JSON.parse(localStorage.getItem('pro_cfg_' + currentUser)) || { 
-            initialBudget: 0, maxSingleSpend: 5000000, warningThreshold: 500000
-        };
+        config = JSON.parse(localStorage.getItem('pro_cfg_' + currentUser)) || { initialBudget: 0, maxSingleSpend: 5000000, warningThreshold: 500000 };
         
         document.getElementById('initial-budget').value = config.initialBudget;
         document.getElementById('max-single-spend').value = config.maxSingleSpend;
         document.getElementById('warning-threshold').value = config.warningThreshold;
         document.getElementById('date').valueAsDate = new Date();
         
+        // KIỂM TRA ĐĂNG NHẬP LẦN ĐẦU (ĐIỀU HƯỚNG TỚI CẤU HÌNH)
         let isNewUser = localStorage.getItem('pro_is_new_' + currentUser);
         if (isNewUser === 'true') {
             localStorage.removeItem('pro_is_new_' + currentUser);
             switchTab('view-config');
-            showSuccessBanner('Chào mừng! Vui lòng nhập số tiền bạn đang có để bắt đầu nhé!');
-        } else { switchTab('view-add-expense'); }
+            showSuccessBanner('Chào mừng bạn mới! Vui lòng nhập Tổng ngân sách ban đầu (Số tiền bạn đang có) để bắt đầu nhé!');
+        } else {
+            switchTab('view-add-expense');
+        }
 
         renderCoreApp();
     }
@@ -357,6 +359,7 @@
         document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(viewId).classList.add('active');
+        // Tìm nút tương ứng bật trạng thái active
         const tabs = document.querySelectorAll('.tab-btn');
         if(viewId === 'view-add-expense') tabs[0].classList.add('active');
         if(viewId === 'view-statistics') tabs[1].classList.add('active');
@@ -369,7 +372,7 @@
         localStorage.setItem('pro_cfg_' + currentUser, JSON.stringify(config));
         document.getElementById('initial-budget').value = config.initialBudget;
         document.getElementById('add-money-form').reset();
-        showSuccessBanner(`Đã nạp tiền thành công!`);
+        showSuccessBanner(`Ting Ting! Nạp tiền thành công!`);
         renderCoreApp();
     }
 
@@ -423,7 +426,7 @@
 
         if (currentBalance <= config.warningThreshold && config.initialBudget > 0) {
             cCard.classList.add('danger-zone'); cBalanceElement.style.color = 'inherit';
-            showWarningBanner(`Số dư chỉ còn ${currentBalance.toLocaleString('vi-VN')} đ, đã chạm mức báo động!`);
+            showWarningBanner(`CẢNH BÁO: Số dư chỉ còn ${currentBalance.toLocaleString('vi-VN')} đ, đã chạm mức báo động!`);
         } else { cCard.classList.remove('danger-zone'); cBalanceElement.style.color = 'var(--success-color)'; }
 
         if (Object.keys(categoryTotals).length === 0) {
@@ -444,7 +447,9 @@
         const category = document.getElementById('category').value;
         const date = document.getElementById('date').value;
         const note = document.getElementById('note').value;
-        if (amount > config.maxSingleSpend) alert(`🚨 CẢNH BÁO: Khoản chi vượt hạn mức (${config.maxSingleSpend.toLocaleString('vi-VN')} đ)!`);
+
+        if (amount > config.maxSingleSpend) alert(`🚨 CẢNH BÁO: Khoản chi này vượt hạn mức 1 lần quy định (${config.maxSingleSpend.toLocaleString('vi-VN')} đ)!`);
+
         expenses.push({ id: Date.now(), amount, category, date, note });
         showSuccessBanner(`Đã ghi nhận trừ -${amount.toLocaleString('vi-VN')} đ.`);
         localStorage.setItem('pro_exp_' + currentUser, JSON.stringify(expenses));
@@ -461,28 +466,22 @@
         }
     }
 
-    // --- HỆ THỐNG AI CHATBOT BẰNG GEMINI API THỰC TẾ ---
+    // --- HỆ THỐNG AI CHATBOT (NLP CƠ BẢN) ---
     function toggleAIChat() {
         const win = document.getElementById('ai-chat-window');
         win.style.display = win.style.display === 'flex' ? 'none' : 'flex';
     }
 
-    function appendChatMsg(text, sender, id = null) {
+    function appendChatMsg(text, sender) {
         const body = document.getElementById('ai-chat-body');
         const div = document.createElement('div');
         div.className = sender === 'ai' ? 'msg-ai' : 'msg-user';
         div.innerHTML = text;
-        if(id) div.id = 'msg-' + id;
         body.appendChild(div);
-        body.scrollTop = body.scrollHeight; 
+        body.scrollTop = body.scrollHeight; // Cuộn xuống dưới cùng
     }
 
-    function removeChatMsg(id) {
-        const msg = document.getElementById('msg-' + id);
-        if(msg) msg.remove();
-    }
-
-    async function handleAIChat(e) {
+    function handleAIChat(e) {
         e.preventDefault();
         const input = document.getElementById('ai-input');
         const text = input.value.trim();
@@ -491,68 +490,53 @@
         appendChatMsg(text, 'user');
         input.value = '';
 
-        if (GEMINI_API_KEY === "DÁN_API_KEY_CỦA_BẠN_VÀO_ĐÂY" || !GEMINI_API_KEY) {
-            appendChatMsg("⚠️ Lỗi: Bạn chưa gắn API Key. Vui lòng mở file code HTML, tìm dòng <b>const GEMINI_API_KEY</b> để dán mã của bạn vào nhé!", 'ai');
-            return;
-        }
-
-        const loadingId = Date.now();
-        appendChatMsg("<i>Đang suy nghĩ...</i>", 'ai', loadingId);
-
-        try {
-            const prompt = `Bạn là một trợ lý quản lý chi tiêu tài chính chuyên nghiệp. Người dùng nói: "${text}".
-            Nhiệm vụ của bạn là đọc hiểu câu nói này, tự động suy luận danh mục chi tiêu hợp lý nhất (nếu là khoản chi) và trả về dữ liệu thuần túy dưới định dạng JSON duy nhất.
-            KHÔNG được trả về bất kỳ markdown hay text nào khác ngoài JSON. Cấu trúc bắt buộc:
-            {
-                "action": "expense" (nếu là chi tiền) hoặc "income" (nếu là thu/nhận tiền) hoặc "unknown" (nếu không hiểu),
-                "amount": (số tiền thực tế dạng số, ví dụ người dùng nói 50k thì ghi 50000, 1 củ/triệu thì ghi 1000000),
-                "category": (CHỈ ĐƯỢC chọn 1 trong các chữ chính xác sau: "🍔 Ăn uống", "🚗 Di chuyển", "🛍️ Mua sắm", "⚡ Hóa đơn", "🎈 Giải trí", "🔮 Khác"),
-                "note": "(Tóm tắt lại khoản chi để làm ghi chú)",
-                "reply": "(Viết 1 câu trả lời thân thiện, hài hước bằng Tiếng Việt báo cho người dùng biết bạn đã xử lý xong)"
-            }`;
-
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }]
-                })
-            });
-
-            if (!response.ok) throw new Error("Lỗi mạng hoặc API Key sai");
-
-            const data = await response.json();
-            let aiText = data.candidates[0].content.parts[0].text;
+        // Xử lý logic NLP đơn giản sau 0.5s để tạo cảm giác AI đang "suy nghĩ"
+        setTimeout(() => {
+            const lowerText = text.toLowerCase();
+            // Lọc tìm số tiền (VD: 50k, 100 ngàn, 2 tr, 5 triệu)
+            const match = lowerText.match(/(\d+)\s*(k|ngàn|nghìn|tr|triệu|vnd|đ)/);
             
-            aiText = aiText.replace(/```json/g, '').replace(/```/g, '').trim();
-            const result = JSON.parse(aiText);
+            if(!match) {
+                appendChatMsg("Xin lỗi, tôi chưa nhận diện được số tiền. Bạn vui lòng thử lại theo mẫu: <i>'ăn sáng 50k'</i> nhé!", 'ai');
+                return;
+            }
 
-            removeChatMsg(loadingId);
+            let num = parseFloat(match[1]);
+            let unit = match[2];
+            let actualAmount = num;
+            if (['k', 'ngàn', 'nghìn'].includes(unit)) actualAmount *= 1000;
+            if (['tr', 'triệu'].includes(unit)) actualAmount *= 1000000;
 
-            if (result.action === 'income') {
-                config.initialBudget += result.amount;
+            // Xác định Hành động: Nạp tiền (Income) hay Chi tiêu (Expense)
+            const isIncome = /lương|thưởng|nhận|cho|nạp|cộng/.test(lowerText);
+
+            if (isIncome) {
+                config.initialBudget += actualAmount;
                 localStorage.setItem('pro_cfg_' + currentUser, JSON.stringify(config));
                 document.getElementById('initial-budget').value = config.initialBudget;
                 renderCoreApp();
-                appendChatMsg(`💰 <b>${result.reply}</b><br>(Đã cộng thêm ${result.amount.toLocaleString('vi-VN')} đ)`, 'ai');
-            } 
-            else if (result.action === 'expense') {
-                expenses.push({ id: Date.now(), amount: result.amount, category: result.category, date: new Date().toISOString().split('T')[0], note: result.note });
+                appendChatMsg(`💰 Tuyệt vời! Tôi đã cộng <b>${actualAmount.toLocaleString('vi-VN')} đ</b> vào tổng ngân sách của bạn.`, 'ai');
+            } else {
+                // Xác định danh mục dựa trên từ khóa
+                let cat = "🔮 Khác";
+                if (/ăn|uống|cà phê|cafe|phở|cơm|nước/.test(lowerText)) cat = "🍔 Ăn uống";
+                else if (/xe|xăng|grab|taxi|đi lại|gửi xe/.test(lowerText)) cat = "🚗 Di chuyển";
+                else if (/mua|siêu thị|áo|quần|đồ|shopee/.test(lowerText)) cat = "🛍️ Mua sắm";
+                else if (/điện|nước|mạng|wifi|hóa đơn|tiền nhà/.test(lowerText)) cat = "⚡ Hóa đơn";
+                else if (/chơi|xem phim|game|giải trí/.test(lowerText)) cat = "🎈 Giải trí";
+
+                let warningMsg = '';
+                if (actualAmount > config.maxSingleSpend) {
+                    warningMsg = `<br><span style="color:#e53e3e; font-weight:bold;">⚠️ Lưu ý: Khoản chi này đã vượt mức chi tối đa cho phép 1 lần!</span>`;
+                }
+
+                expenses.push({ id: Date.now(), amount: actualAmount, category: cat, date: new Date().toISOString().split('T')[0], note: text });
                 localStorage.setItem('pro_exp_' + currentUser, JSON.stringify(expenses));
                 renderCoreApp();
                 
-                let warning = result.amount > config.maxSingleSpend ? "<br><span style='color:red;'>⚠️ Vượt hạn mức 1 lần chi!</span>" : "";
-                appendChatMsg(`💸 <b>${result.reply}</b><br>(Đã ghi nhận trừ ${result.amount.toLocaleString('vi-VN')} đ vào mục ${result.category})${warning}`, 'ai');
-            } 
-            else {
-                appendChatMsg(result.reply || "Xin lỗi, tôi không bóc tách được số tiền trong câu của bạn.", 'ai');
+                appendChatMsg(`💸 Đã ghi nhận chi tiêu: <b>${actualAmount.toLocaleString('vi-VN')} đ</b> cho danh mục <b>${cat}</b>.${warningMsg}`, 'ai');
             }
-
-        } catch (error) {
-            removeChatMsg(loadingId);
-            appendChatMsg("❌ Lỗi kết nối AI. Vui lòng kiểm tra lại API Key xem có điền đúng chưa nhé.", 'ai');
-            console.error(error);
-        }
+        }, 500);
     }
 
     // THEME Tối/Sáng
